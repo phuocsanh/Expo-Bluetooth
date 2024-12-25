@@ -84,7 +84,6 @@ const DeviceModal: FC<DeviceModalProps> = (props) => {
           Tap on a device to connect
         </Text>
         <FlatList
-          horizontal
           contentContainerStyle={modalStyle.modalFlatlistContiner}
           data={devices}
           renderItem={renderDeviceModalListItem}

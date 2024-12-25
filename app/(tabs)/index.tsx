@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 50,
     marginHorizontal: 20,
-    marginBottom: 5,
+    marginBottom: 100,
     borderRadius: 8,
   },
   ctaButtonText: {

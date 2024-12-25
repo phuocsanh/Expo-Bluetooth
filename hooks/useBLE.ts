@@ -92,7 +92,6 @@ function useBLE(): BluetoothLowEnergyApi {
     devices.findIndex((device) => nextDevice.id === device.id) > -1;
   const stopScanDevice = () => {
     bleManager.stopDeviceScan();
-    console.log("🚀 ~ stopScanDevice ~ stopScanDevice:");
   };
   const scanForPeripherals = () => {
     bleManager.startDeviceScan(null, null, (error, device) => {
@@ -111,10 +110,8 @@ function useBLE(): BluetoothLowEnergyApi {
       }
 
       if (device && device.name) {
-        stopScanDevice();
         setAllDevices((prevState: Device[]) => {
           if (!isDuplicteDevice(prevState, device)) {
-            console.log("🚀 ~ setAllDevices ~ device:", device);
             return [...prevState, device];
           }
           return prevState;
@@ -126,11 +123,13 @@ function useBLE(): BluetoothLowEnergyApi {
   const connectToDevice = async (device: Device) => {
     try {
       const deviceConnection = await bleManager.connectToDevice(device.id);
+      console.log("🚀 ~ connectToDevice ~ deviceConnection:", deviceConnection);
       setConnectedDevice(deviceConnection);
       await deviceConnection.discoverAllServicesAndCharacteristics();
       bleManager.stopDeviceScan();
       startStreamingData(deviceConnection);
     } catch (e) {
+      console.log("FAILED TO CONNECT");
       console.log("FAILED TO CONNECT", e);
     }
   };
